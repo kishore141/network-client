@@ -1,4 +1,4 @@
-const axios = require("axios");
+import axios from "axios";
 
 const IS_NETWORK_REQUEST_LOGGING_ENABLED =
   process.env.K_NETWORK_CLIENT_IS_REQUEST_LOGGING;
@@ -7,15 +7,15 @@ const IS_NETWORK_RESPONSE_LOGGING_ENABLED =
 const IS_NETWORK_ERROR_LOGGING_ENABLED =
   process.env.K_NETWORK_CLIENT_IS_REQUEST_LOGGING;
 
-const postJson = async (url, body, headers, log = true) => {
+const postJson = async (url, body, reqHeaders, log = true) => {
   if (IS_NETWORK_REQUEST_LOGGING_ENABLED && log) {
-    console.log(JSON.stringify({ url, body, headers }));
+    console.log(JSON.stringify({ url, body, reqHeaders }));
   }
 
   try {
     const { data, status, statusText, headers, config, request } =
       await axios.post(url, body, {
-        headers: headers,
+        headers: reqHeaders,
       });
     if (IS_NETWORK_RESPONSE_LOGGING_ENABLED && log) {
       console.log(
@@ -45,6 +45,6 @@ const postJson = async (url, body, headers, log = true) => {
   }
 };
 
-module.exports = {
+export default {
   postJson,
 };
