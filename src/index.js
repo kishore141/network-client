@@ -1,15 +1,25 @@
 import axios from "axios";
 
 const IS_NETWORK_REQUEST_LOGGING_ENABLED =
-  process.env.K_NETWORK_CLIENT_IS_REQUEST_LOGGING;
+  process.env.K_NETWORK_CLIENT_IS_REQUEST_LOGGING || false;
 const IS_NETWORK_RESPONSE_LOGGING_ENABLED =
-  process.env.K_NETWORK_CLIENT_IS_REQUEST_LOGGING;
+  process.env.K_NETWORK_CLIENT_IS_REQUEST_LOGGING || false;
 const IS_NETWORK_ERROR_LOGGING_ENABLED =
-  process.env.K_NETWORK_CLIENT_IS_REQUEST_LOGGING;
+  process.env.K_NETWORK_CLIENT_IS_REQUEST_LOGGING || false;
 
-const postJson = async (url, body, reqHeaders, log = true) => {
+export const NetworkClient = {};
+
+NetworkClient.postJson = async (url, body, reqHeaders, log = true) => {
   if (IS_NETWORK_REQUEST_LOGGING_ENABLED && log) {
-    console.log(JSON.stringify({ url, body, reqHeaders }));
+    console.log(
+      JSON.stringify({
+        LOG_TYPE: "NETWORK REQUEST",
+        url,
+        body,
+        reqHeaders,
+        log,
+      })
+    );
   }
 
   try {
@@ -45,6 +55,4 @@ const postJson = async (url, body, reqHeaders, log = true) => {
   }
 };
 
-export default {
-  postJson,
-};
+export default NetworkClient;

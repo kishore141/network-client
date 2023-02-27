@@ -12,7 +12,6 @@
     "dev": "node src/index.js",
     "start": "node build/index.js",
     "start:build": "node ./build/index.js"
-
   },
   "keywords": [
     "network"
@@ -24,6 +23,7 @@
     "@babel/core": "^7.21.0",
     "@babel/eslint-parser": "^7.19.1",
     "@babel/preset-env": "^7.20.2",
+    "babel-plugin-add-module-exports": "^1.0.4",
     "eslint": "^8.35.0",
     "eslint-config-standard": "^17.0.0",
     "rimraf": "^4.1.2"
